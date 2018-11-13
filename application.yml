@@ -1,6 +1,25 @@
 spring:
+  cloud:
+    config:
+      override-none: true #本地配置文件覆盖服务器上的文件
   session:
     store-type: redis
+  zipkin:
+    base-url: http://127.0.0.1:8850 #服务跟踪地址
+  sleuth:
+    sampler:
+      percentage: 0.5 #刷新频率
+    scheduled:
+      enabled: false
+    integration:
+      websockets:
+        enabled: false
+    zuul:
+      enabled: false
+    rxjava:
+      schedulers:
+        hook:
+          enabled: false
   redis:
     host: 127.0.0.1
     port: 6379
@@ -12,20 +31,19 @@ spring:
       max-wait: 60000
       database: 0
       timeout: 60000
+  messages:
+    basename: i18n/messages,i18n/domain #多语言翻译
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 15MB
+      max-request-size: 15MB
   rabbitmq:
-    host: 192.168.1.73
-    username: cs
+    host: 127.0.0.1
+    username: rabbitmq
     password: Ab123456
     port: 5672
-    publisher-confirms: true 
-    publisher-returns: true
-    listener:
-        direct:
-           acknowledge-mode:manual
-        simple:
-           acknowledge-mode:manual
   datasource:
-    url: jdbc:mysql://localhost:3306/es?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
@@ -49,9 +67,31 @@ spring:
         format_sql: true
         database: MYSQL
         show-sql: false
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: com.noohle.domain.common.data.MySQLDialect
     hibernate:
       ddl-auto: update
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+management:
+  security:
+    enabled: false
+  health:
+    solr:
+      enabled: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:123456@127.0.0.1:8009/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 5      # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-expiration-duration-in-seconds: 10  # 发呆时间，即服务续约到期时间（缺省为90s）
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    appname: ${spring.application.name}${instance.suffix:}
+    virtualHostName: ${spring.application.name}${instance.suffix:}
+    secureVirtualHostName: ${spring.application.name}${instance.suffix:}
+    
+#全局变量
+mongodb_uri: mongodb://127.0.0.1:20000,127.0.0.1:20001
+datasource_url: jdbc:mysql://127.0.0.1:3306
