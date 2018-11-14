@@ -2,24 +2,6 @@ spring:
   cloud:
     config:
       override-none: true #本地配置文件覆盖服务器上的文件
-  session:
-    store-type: redis
-  zipkin:
-    base-url: http://127.0.0.1:8850 #服务跟踪地址
-  sleuth:
-    sampler:
-      percentage: 0.5 #刷新频率
-    scheduled:
-      enabled: false
-    integration:
-      websockets:
-        enabled: false
-    zuul:
-      enabled: false
-    rxjava:
-      schedulers:
-        hook:
-          enabled: false
   redis:
     host: 127.0.0.1
     port: 6379
