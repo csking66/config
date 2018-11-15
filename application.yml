@@ -49,7 +49,7 @@ spring:
         format_sql: true
         database: MYSQL
         show-sql: false
-        dialect: com.noohle.domain.common.data.MySQLDialect
+        dialect: com.domain.common.MySQLDialect
     hibernate:
       ddl-auto: update
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
