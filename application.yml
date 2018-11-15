@@ -55,12 +55,6 @@ spring:
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-management:
-  security:
-    enabled: false
-  health:
-    solr:
-      enabled: false
 eureka:
   client:
     serviceUrl:
