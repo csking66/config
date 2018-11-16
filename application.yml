@@ -71,3 +71,5 @@ eureka:
 #全局变量
 mongodb_uri: mongodb://127.0.0.1:20000,127.0.0.1:20001
 datasource_url: jdbc:mysql://127.0.0.1:3306
+project:
+  version: 2.0
